@@ -1,0 +1,28 @@
+version: '3.8' #not necessary to write this but all for good practices
+
+services:
+  backend:
+    image: anshulfr/music_recommender_jtp:backend  # using DockerHub image
+    ports:
+      - "8000:8000" #it's running on 8000
+    volumes:
+      - ./backend:/app #volume attached for good measures
+    environment:
+      - PYTHONUNBUFFERED=1 
+    networks:
+      - app-network
+
+  frontend:
+    image: anshulfr/music_recommender_jtp:frontend  # using DockerHub image
+    ports:
+      - "80:80" #running on 80
+    environment:
+      - VITE_API_BASE_URL=http://localhost:8000 #taking from .env
+    depends_on:
+      - backend #will not work until backend does
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge #bridge network for communication between containers
