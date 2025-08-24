@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: music-recommender-backend
+  labels:
+    app: music-recommender
+    tier: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: music-recommender
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: music-recommender
+        tier: backend
+    spec:
+      containers:
+      - name: backend
+        image: ${DOCKER_REGISTRY}/music-recommender-backend:latest
+        ports:
+        - containerPort: 8000
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: music-recommender-backend-service
+spec:
+  selector:
+    app: music-recommender
+    tier: backend
+  ports:
+  - port: 8000
+    targetPort: 8000
+  type: ClusterIP
