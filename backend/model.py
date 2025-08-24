@@ -6,7 +6,7 @@ from joblib import dump
 
 # getting the dataset
 try:
-    df = pd.read_csv("Music_data.csv", encoding="utf-8")  # used encoding because the dataset started giving unf error
+    df = pd.read_csv("Music_data.csv", encoding="latin1")  # used encoding because the dataset started giving unf error
 # if dataset is missing 
 except FileNotFoundError:
     print("Dataset is missing, check for it.")
@@ -32,10 +32,10 @@ if df is not None:
     # KNN model
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(df[features])
-    knn = NearestNeighbors(n_neighbors=15, metric='cosine').fit(X_scaled)
+    knn = NearestNeighbors(n_neighbors=5, metric='cosine').fit(X_scaled)
 
     # New improved recommend function with sequential support
-    def recommend(current_song, current_artist, previous_song=None, previous_artist=None, n=10):
+    def recommend(current_song, current_artist, previous_song=None, previous_artist=None, n=5):
         # lowercasing the user input to match my dataset
         current_song_lower = current_song.lower().strip()
         current_artist_lower = current_artist.lower().strip()
@@ -56,8 +56,8 @@ if df is not None:
                 return None
 
         # getting the best match
-        current_pos = current_matches.iloc[0].name
-        current_features = X_scaled[df.index.get_loc(current_pos)]
+        current_idx = current_matches.index[0]
+        current_features = X_scaled[current_idx]
         
         # Initialize with current song's features
         blended_features = current_features
@@ -73,8 +73,8 @@ if df is not None:
             ]
             
             if not previous_matches.empty:
-                previous_pos = previous_matches.iloc[0].name
-                previous_features = X_scaled[df.index.get_loc(previous_pos)]
+                previous_idx = previous_matches.index[0]
+                previous_features = X_scaled[previous_idx]
                 # Simple average blending (can be adjusted to weighted average)
                 blended_features = (current_features + previous_features)/2
 

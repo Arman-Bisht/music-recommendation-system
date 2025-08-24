@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: music-recommender-frontend
+  labels:
+    app: music-recommender
+    tier: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: music-recommender
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: music-recommender
+        tier: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: ${DOCKER_REGISTRY}/music-recommender-frontend:latest
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: "300m"
+            memory: "256Mi"
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 15
+          periodSeconds: 20
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: music-recommender-frontend-service
+spec:
+  selector:
+    app: music-recommender
+    tier: frontend
+  ports:
+  - port: 80
+    targetPort: 80
+  type: LoadBalancer

@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: {{ docker_registry | default('') }}music-recommender-frontend:{{ image_tag | default('latest') }}
+    ports:
+      - "{{ frontend_port | default('80') }}:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+    restart: unless-stopped
+    environment:
+      - VITE_API_URL=http://{{ backend_host | default('localhost') }}:{{ backend_port | default('8000') }}
+
+  backend:
+    image: {{ docker_registry | default('') }}music-recommender-backend:{{ image_tag | default('latest') }}
+    ports:
+      - "{{ backend_port | default('8000') }}:8000"
+    networks:
+      - app-network
+    restart: unless-stopped
+    volumes:
+      - ./backend_data:/app/data
+
+networks:
+  app-network:
+    driver: bridge

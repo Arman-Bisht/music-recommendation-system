@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="600" viewBox="0 0 1000 600">
+  <style>
+    .title { font: bold 24px sans-serif; fill: #333; }
+    .subtitle { font: bold 18px sans-serif; fill: #555; }
+    .box { stroke: #333; stroke-width: 2; rx: 10; ry: 10; }
+    .arrow { stroke: #555; stroke-width: 2; marker-end: url(#arrowhead); }
+    .text { font: 14px sans-serif; fill: #333; }
+    .phase { font: bold 16px sans-serif; fill: #333; }
+  </style>
+  
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#555" />
+    </marker>
+  </defs>
+  
+  <!-- Title -->
+  <text x="500" y="40" class="title" text-anchor="middle">Music Recommender DevOps Workflow</text>
+  
+  <!-- Development Phase -->
+  <rect x="50" y="80" width="200" height="120" class="box" fill="#e6f7ff" />
+  <text x="150" y="100" class="phase" text-anchor="middle">Development</text>
+  <text x="150" y="130" class="text" text-anchor="middle">Local Development</text>
+  <text x="150" y="150" class="text" text-anchor="middle">Docker Compose</text>
+  <text x="150" y="170" class="text" text-anchor="middle">Code Changes</text>
+  
+  <!-- Version Control -->
+  <rect x="300" y="80" width="200" height="120" class="box" fill="#f0f0f0" />
+  <text x="400" y="100" class="phase" text-anchor="middle">Version Control</text>
+  <text x="400" y="130" class="text" text-anchor="middle">Git Repository</text>
+  <text x="400" y="150" class="text" text-anchor="middle">Feature Branches</text>
+  <text x="400" y="170" class="text" text-anchor="middle">Pull Requests</text>
+  
+  <!-- CI/CD -->
+  <rect x="550" y="80" width="200" height="120" class="box" fill="#fff2e6" />
+  <text x="650" y="100" class="phase" text-anchor="middle">CI/CD</text>
+  <text x="650" y="130" class="text" text-anchor="middle">GitHub Actions</text>
+  <text x="650" y="150" class="text" text-anchor="middle">Jenkins</text>
+  <text x="650" y="170" class="text" text-anchor="middle">Tests & Builds</text>
+  
+  <!-- Deployment Options -->
+  <rect x="800" y="80" width="150" height="120" class="box" fill="#e6ffe6" />
+  <text x="875" y="100" class="phase" text-anchor="middle">Deployment</text>
+  <text x="875" y="130" class="text" text-anchor="middle">AWS ECS</text>
+  <text x="875" y="150" class="text" text-anchor="middle">Kubernetes</text>
+  <text x="875" y="170" class="text" text-anchor="middle">Docker Swarm</text>
+  
+  <!-- Infrastructure as Code -->
+  <rect x="50" y="250" width="200" height="120" class="box" fill="#f9f2ff" />
+  <text x="150" y="270" class="phase" text-anchor="middle">Infrastructure as Code</text>
+  <text x="150" y="300" class="text" text-anchor="middle">Terraform</text>
+  <text x="150" y="320" class="text" text-anchor="middle">CloudFormation</text>
+  <text x="150" y="340" class="text" text-anchor="middle">Pulumi</text>
+  
+  <!-- Configuration Management -->
+  <rect x="300" y="250" width="200" height="120" class="box" fill="#fff9e6" />
+  <text x="400" y="270" class="phase" text-anchor="middle">Configuration Management</text>
+  <text x="400" y="300" class="text" text-anchor="middle">Ansible</text>
+  <text x="400" y="320" class="text" text-anchor="middle">Chef</text>
+  <text x="400" y="340" class="text" text-anchor="middle">Puppet</text>
+  
+  <!-- Monitoring & Logging -->
+  <rect x="550" y="250" width="200" height="120" class="box" fill="#ffe6e6" />
+  <text x="650" y="270" class="phase" text-anchor="middle">Monitoring & Logging</text>
+  <text x="650" y="300" class="text" text-anchor="middle">Prometheus & Grafana</text>
+  <text x="650" y="320" class="text" text-anchor="middle">ELK Stack</text>
+  <text x="650" y="340" class="text" text-anchor="middle">CloudWatch</text>
+  
+  <!-- Security -->
+  <rect x="800" y="250" width="150" height="120" class="box" fill="#e6ffee" />
+  <text x="875" y="270" class="phase" text-anchor="middle">Security</text>
+  <text x="875" y="300" class="text" text-anchor="middle">SAST/DAST</text>
+  <text x="875" y="320" class="text" text-anchor="middle">Container Scanning</text>
+  <text x="875" y="340" class="text" text-anchor="middle">Secret Management</text>
+  
+  <!-- Production Environment -->
+  <rect x="300" y="420" width="400" height="120" class="box" fill="#e6f9ff" />
+  <text x="500" y="440" class="phase" text-anchor="middle">Production Environment</text>
+  <text x="500" y="470" class="text" text-anchor="middle">High Availability</text>
+  <text x="500" y="490" class="text" text-anchor="middle">Auto Scaling</text>
+  <text x="500" y="510" class="text" text-anchor="middle">Load Balancing</text>
+  
+  <!-- Arrows -->
+  <!-- Development to Version Control -->
+  <line x1="250" y1="140" x2="300" y2="140" class="arrow" />
+  
+  <!-- Version Control to CI/CD -->
+  <line x1="500" y1="140" x2="550" y2="140" class="arrow" />
+  
+  <!-- CI/CD to Deployment -->
+  <line x1="750" y1="140" x2="800" y2="140" class="arrow" />
+  
+  <!-- IaC to Production -->
+  <line x1="150" y1="370" x2="150" y2="480" class="arrow" />
+  <line x1="150" y1="480" x2="300" y2="480" class="arrow" />
+  
+  <!-- Config Management to Production -->
+  <line x1="400" y1="370" x2="400" y2="420" class="arrow" />
+  
+  <!-- Monitoring to Production -->
+  <line x1="650" y1="370" x2="650" y2="480" class="arrow" />
+  <line x1="650" y1="480" x2="700" y2="480" class="arrow" />
+  
+  <!-- Security to Production -->
+  <line x1="875" y1="370" x2="875" y2="480" class="arrow" />
+  <line x1="875" y1="480" x2="700" y2="480" class="arrow" />
+  
+  <!-- CI/CD to Monitoring -->
+  <line x1="650" y1="200" x2="650" y2="250" class="arrow" />
+  
+  <!-- Deployment to Production -->
+  <line x1="875" y1="200" x2="875" y2="250" class="arrow" />
+</svg>
